@@ -1,0 +1,21 @@
+[Unit]
+Description=Mattermost Agents Hub Daemon (Think Tank & Scientific AI Agents)
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+User=jlja
+Group=jlja
+WorkingDirectory=/mnt/expansion/desplegados/mattermost-agents-hub
+Environment=PYTHONPATH=/mnt/expansion/desplegados/mattermost-agents-hub
+EnvironmentFile=/mnt/expansion/desplegados/mattermost-agents-hub/.env
+ExecStart=/home/ambientesPy/revistaslatam/bin/python /mnt/expansion/desplegados/mattermost-agents-hub/main.py
+Restart=always
+RestartSec=5s
+StandardOutput=journal
+StandardError=journal
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
